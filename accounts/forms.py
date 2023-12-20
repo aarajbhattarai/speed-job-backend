@@ -111,7 +111,7 @@ class UserLoginForm(forms.Form):
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
     def get_user(self):
-        return self.user
+        return self.user,self.fields["role"]
 
 
 class EmployeeProfileUpdateForm(forms.ModelForm):

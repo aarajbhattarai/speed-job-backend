@@ -42,7 +42,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a href="{% url 'jobs:home' %}" class="navbar-brand">
-                <img src="{% static 'img/logo-small.png' %}" alt="logo" class="d-none d-lg-block">
+                <img src="{% static 'img/Speed_Wings_logo.png' %}" alt="logo" class="d-none d-xl-block">
                 <span class="sr-only">Home</span>
             </a>
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -52,9 +52,6 @@
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 {% with request.resolver_match.url_name as url_name %}
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item {% if url_name == 'home' %}active{% endif %}">
-                            <a href="{% url 'jobs:home' %}" class="nav-link">Home <span class="sr-only">(current)</span></a>
-                        </li>
                         <li class="nav-item {% if url_name == 'jobs' %}active{% endif %}">
                             <a href="{% url 'jobs:jobs' %}" class="nav-link">Jobs</a>
                         </li>
@@ -185,47 +182,7 @@
     {% endif %}
     {% block content %} {% endblock %}
 </div>
-<footer class="footer">
-    <div class="footer__block">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 mb-5">
-                    <h4 class="h5">About django-jobs</h4>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis
-                        aliquet congue. </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer__copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 text-md-left text-center">
-                    <p>&copy;{% now "Y" %} django-jobs!</p>
-                </div>
-                <div class="col-md-8 text-center text-md-right github-buttons">
-                    <a href="https://github.com/manjurulhoque/django-job-portal" target="_blank" rel="noopener">
-                        <img alt="stars"
-                             src="https://img.shields.io/github/stars/manjurulhoque/django-job-portal?style=social"/>
-                    </a>
-                    <a href="https://github.com/manjurulhoque/django-job-portal" target="_blank" rel="noopener">
-                        <img alt="forks"
-                             src="https://img.shields.io/github/forks/manjurulhoque/django-job-portal?style=social"/>
-                    </a>
-                    <a href="https://github.com/manjurulhoque/django-job-portal/issues" target="_blank" rel="noopener">
-                        <img alt="issues"
-                             src="https://img.shields.io/github/issues/manjurulhoque/django-job-portal?style=social"/>
-                    </a>
-                    <a href="https://github.com/manjurulhoque/django-job-portal/#contributors-" target="_blank"
-                       rel="noopener">
-                        <img alt="translation"
-                             src="https://img.shields.io/badge/all_contributors-18-orange.svg?style=flat-square"/>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"></script>

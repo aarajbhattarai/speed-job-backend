@@ -1,4 +1,4 @@
-from django.urls import re_path
+from sour import re_path
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
