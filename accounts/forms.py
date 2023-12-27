@@ -97,6 +97,7 @@ class UserLoginForm(forms.Form):
     def clean(self, *args, **kwargs):
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
+        # print("From Djnago form",email)
 
         if email and password:
             self.user = authenticate(email=email, password=password)
@@ -111,7 +112,7 @@ class UserLoginForm(forms.Form):
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
     def get_user(self):
-        return self.user,self.fields["role"]
+        return self.user
 
 
 class EmployeeProfileUpdateForm(forms.ModelForm):

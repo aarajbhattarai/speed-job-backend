@@ -19,9 +19,12 @@ def jwt_payload(user, context=None):
     payload = {
         "user_id": user.id,
         "email": user.email,
+        "role": user.role,
         # 'exp': datetime.utcnow() + GRAPHQL_JWT['JWT_EXPIRATION_DELTA'],
         "exp": timegm(exp.utctimetuple()),
+        "mytestrole":"testrole",
     }
+    print("JWT payload",payload)
 
     if jwt_settings.JWT_ALLOW_REFRESH:
         payload["origIat"] = timegm(datetime.utcnow().utctimetuple())

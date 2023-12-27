@@ -21,6 +21,7 @@ User = get_user_model()
 @decorators.permission_classes([permissions.AllowAny])
 def registration(request):
     serializer = UserCreateSerializer(data=request.data)
+
     if not serializer.is_valid(raise_exception=True):
         return response.Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
     user = serializer.save()
@@ -84,8 +85,10 @@ class SocialLoginAPIView(GenericAPIView):
             # customized response
             context = {
                 "email": authenticated_user.email,
+                "role": authenticated_user.role,
                 "username": authenticated_user.username,
                 "access": str(token.access_token),
                 "refresh": str(token),
             }
+
             return Response(status=status.HTTP_200_OK, data=context)
