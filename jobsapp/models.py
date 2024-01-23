@@ -10,6 +10,7 @@ from .manager import JobManager
 JOB_TYPE = (("1", "Full time"), ("2", "Part time"), ("3", "Seasonal"))
 
 
+
 class Job(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
@@ -26,6 +27,7 @@ class Job(models.Model):
     salary = models.IntegerField(default=0, blank=True)
     tags = models.ManyToManyField(Tag)
     vacancy = models.IntegerField(default=1)
+    
 
     objects = JobManager()
 
