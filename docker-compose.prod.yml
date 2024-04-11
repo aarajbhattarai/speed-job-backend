@@ -7,12 +7,12 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     expose:
-      - "8000"
+      - "8081"
     volumes:
       - static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/mediafiles
     #    env_file: .env
-    command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8081
 
   nginx:
     restart: always

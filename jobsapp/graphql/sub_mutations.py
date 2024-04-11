@@ -28,6 +28,7 @@ class CreateNewJob(MutationMixin, DynamicArgsMixin, CreateNewJobMixin, graphene.
         "company_description": "String",
         "website": "String",
         "salary": "Int",
+        "vacancy": "Int",
     }
     permission_classes = [IsAuthenticated, IsEmployer]
 

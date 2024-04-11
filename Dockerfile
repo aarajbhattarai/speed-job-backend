@@ -14,7 +14,7 @@ COPY . /usr/src/app
 
 RUN cp .env.dev.sample .env
 
-#EXPOSE 8000
+#EXPOSE 8081
 
 RUN chmod +x entrypoint.sh
 
