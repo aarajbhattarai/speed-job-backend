@@ -7,7 +7,7 @@ from tags.models import Tag
 
 from .manager import JobManager
 
-JOB_TYPE = (("1", "Full time"), ("2", "Part time"), ("3", "Seasonal"))
+JOB_TYPE = (("FullTime", "Full time"), ("PartTime", "Part time"), ("Seasonal", "Seasonal"))
 
 
 
