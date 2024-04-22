@@ -51,7 +51,7 @@ class NewJobSerializer(serializers.ModelSerializer):
 class ApplyJobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant
-        fields = ("job",)
+        fields = ("job")
 
 
 class ApplicantSerializer(serializers.ModelSerializer):

@@ -1,6 +1,7 @@
 import graphene
 
 from jobsapp.graphql.graphql_mixins import (
+    ApplyJobMixin,
     DynamicArgsMixin,
     MutationMixin,
     CreateNewJobMixin,
@@ -8,11 +9,11 @@ from jobsapp.graphql.graphql_mixins import (
     SingleObjectMixin,
 )
 from jobsapp.graphql.input_types import TagInput
-from jobsapp.graphql.permissions import IsAuthenticated, IsEmployer
+from jobsapp.graphql.permissions import IsAuthenticated, IsEmployee, IsEmployer
 from graphene.types import Int
 
 from jobsapp.graphql.types import JobGQLType
-from jobsapp.models import Job
+from jobsapp.models import Applicant, Job
 
 
 class CreateNewJob(MutationMixin, DynamicArgsMixin, CreateNewJobMixin, graphene.Mutation):
@@ -60,3 +61,19 @@ class UpdateJob(MutationMixin, DynamicArgsMixin, SingleObjectMixin, UpdateJobMix
     permission_classes = [IsAuthenticated, IsEmployer]
     model = Job
     check_object_level_permission: bool = False
+
+
+class ApplyJob(MutationMixin, DynamicArgsMixin, SingleObjectMixin, ApplyJobMixin, graphene.Mutation):
+    job = graphene.Field(JobGQLType)
+    __doc__ = ApplyJobMixin.__doc__
+    _required_args = {"pk": "ID"}
+    _args = {
+        "status": "Int",
+        "job": "Int",
+        "comment": "String",
+    }
+
+    permission_classes = [IsAuthenticated, IsEmployee]
+    model = Applicant
+    check_object_level_permission: bool = False
+

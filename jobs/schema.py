@@ -37,7 +37,7 @@ def jwt_payload(user, context=None):
     return payload
 
 
-class Query(jobs_queries.JobQuery, graphene.ObjectType):
+class Query(jobs_queries.ApplicantQuery,jobs_queries.JobQuery, graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 

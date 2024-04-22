@@ -4,12 +4,17 @@ from graphene_django.utils import camelize
 
 from .exceptions import WrongUsage
 
-from jobsapp.models import Job
+from jobsapp.models import Applicant, Job
 
 
 class JobGQLType(DjangoObjectType):
     class Meta:
         model = Job
+        fields = "__all__"
+
+class ApplicantGQLType(JobGQLType, DjangoObjectType):
+    class Meta:
+        model = Applicant
         fields = "__all__"
 
 

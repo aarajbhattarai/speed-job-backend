@@ -7,9 +7,11 @@ from django.db import transaction
 from django.forms.models import model_to_dict
 
 from accounts.graphql.constants import Messages
+from jobsapp.models import Job
 from .exceptions import PermissionDeniedError
 from .graphql_base import Output
-from ..forms import CreateJobForm
+from ..forms import ApplyJobForm, CreateJobForm
+from accounts.models import User
 
 logger = logging.getLogger(__name__)
 
@@ -331,5 +333,33 @@ class UpdateJobMixin(Output):
             if f.is_valid():
                 job = f.save()
                 return cls(success=True, job=job)
+            else:
+                return cls(success=False, errors=f.errors.get_json_data())
+            
+
+class ApplyJobMixin(Output):
+    form = ApplyJobForm
+
+    @classmethod
+    def resolve_mutation(cls, root, info, **kwargs):
+        user = info.context.user
+        job_id = kwargs.get('job')  # Assuming 'job_id' is passed from GraphQL mutation
+        job = get_object_or_404(Job, id=job_id)  # Retrieve the job object
+        # print(user)
+        # print(type(user))
+        # print(job)
+        # print(type(job))
+        # print(kwargs)
+        with transaction.atomic():
+            f = cls.form(kwargs)
+
+            if f.is_valid():
+                print(applicant,"1111111")
+                applicant = f.save(commit=False)
+                applicant.user = user
+                applicant.job = job
+                applicant.save()
+                print(applicant,"222222")
+                return cls(success=True,applicant=applicant)
             else:
                 return cls(success=False, errors=f.errors.get_json_data())

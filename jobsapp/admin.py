@@ -3,7 +3,7 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
 # Register your models here.
-from jobsapp.models import Job
+from jobsapp.models import Applicant, Job
 
 
 @admin.register(Job)
@@ -22,3 +22,18 @@ class JobAdmin(admin.ModelAdmin):
     ]
     list_filter = ["salary", "last_date", "created_at", "user"]
     date_hierarchy = "created_at"
+
+
+@admin.register(Applicant)
+class ApplicantAdmin(admin.ModelAdmin):
+    list_display = [
+        "user",
+        "job",
+        "comment",
+        "status",
+        "created_at",
+    ]
+    
+    # list_filter = ["salary", "last_date", "created_at", "user"]
+    date_hierarchy = "created_at"
+

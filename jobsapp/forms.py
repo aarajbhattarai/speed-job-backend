@@ -48,4 +48,20 @@ class CreateJobForm(forms.ModelForm):
 class ApplyJobForm(forms.ModelForm):
     class Meta:
         model = Applicant
-        fields = ("job",)
+        exclude = ('created_at',)
+        labels = {
+            "comment": "Add a comment (Optional)",
+        }
+
+    def is_valid(self):
+        valid = super(ApplyJobForm, self).is_valid()
+        # if already valid, then return True
+        if valid:
+            return valid
+        return valid
+
+    def save(self, commit=True):
+        applicant = super(ApplyJobForm, self).save(commit=False)
+        if commit:
+            applicant.save()
+        return applicant
